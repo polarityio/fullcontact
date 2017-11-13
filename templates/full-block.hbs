@@ -1,0 +1,96 @@
+<div class = "likelihood">
+    {{#if block.data.details.likelihood}}
+    <i class = "fa fa-percent #ADADAD"></i><span class="counts"> Likelihood Score: </span>
+    <b>{{block.data.details.likelihood}}</b>
+    {{/if}}
+</div>
+
+
+<div class = "orgs">
+    {{#if block.data.details.organizations}}
+    <i class = "fa fa-info-circle #ADADAD"></i><span class="counts"> Organizations: </span>
+    {{/if}}
+</div>
+
+<div class="Organizations">
+    {{#each block.data.details.organizations as |item|}}
+
+
+    <div class = "organization">
+        {{#if item.name}}
+        <span class="type"> Organization: </span>
+        <b>{{item.name}}</b>
+        {{/if}}
+    </div>
+
+    <div class = "title">
+        {{#if item.title}}
+        <span class="counts"> Job Title: </span>
+        <b>{{item.title}}</b>
+        {{/if}}
+    </div>
+
+    <div class = "start">
+        {{#if item.startDate}}
+        <span class="counts"> Start Date: </span>
+        <b>{{item.startDate}}</b>
+        {{/if}}
+    </div>
+
+    {{/each}}
+</div>
+
+<div class = "location">
+<i class = "fa fa-info-circle #ADADAD"></i><span class="counts"> Demographics: </span>
+</div>
+
+<div class = "locations">
+{{#if block.data.details.demographics.locationDeduced.normalizedLocation}}
+<span class="counts"> Location: </span>
+<b>{{block.data.details.demographics.locationDeduced.normalizedLocation}}</b>
+{{/if}}
+</div>
+
+<div class = "gender">
+{{#if block.data.details.demographics.gender}}
+<span class="counts"> Gender: </span>
+<b>{{block.data.details.demographics.gender}}</b>
+{{/if}}
+</div>
+
+<div class = "socials">
+<i class = "fa fa-info-circle #ADADAD"></i><span class="counts"> Social Media Profiles: </span>
+</div>
+
+<div class="socialProfiles">
+    {{#each block.data.details.socialProfiles as |item|}}
+
+    <div class = "typeName">
+        {{#if item.typeName}}
+        <span class="type"> <b> {{item.typeName}} </b> </span> <a href="{{item.url}}">  (View in {{item.typeName}}) </a>
+        {{/if}}
+    </div>
+
+    <div class = "followers">
+        {{#if item.followers}}
+        <span class="counts"> Followers: </span>
+        <b>{{item.followers}}</b>
+        {{/if}}
+    </div>
+
+    <div class = "following">
+        {{#if item.following}}
+        <span class="counts"> Following: </span>
+        <b>{{item.following}}</b>
+        {{/if}}
+    </div>
+
+    <div class = "username">
+        {{#if item.username}}
+        <span class="balis"> Username: </span>
+        <b>{{item.username}}</b>
+        {{/if}}
+    </div>
+
+    {{/each}}
+</div>
