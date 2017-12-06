@@ -22,7 +22,7 @@ module.exports = {
      * @type String
      * @optional
      */
-    description: "IP Lookup Integration for Shodan",
+    description: "Email lookup information for FullContact",
     entityTypes: ['email'],
     /**
      * An array of style files (css or less) that will be included for your integration. Any styles specified in

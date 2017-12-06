@@ -13,7 +13,7 @@ let requestWithDefaults;
 
 const MAX_PARALLEL_LOOKUPS = 10;
 
- 
+
 /**
  *
  * @param entities
@@ -62,6 +62,24 @@ function doLookup(entities, options, cb) {
                             body: null
                         };
                     } else if (res.statusCode === 202) {
+                        // no result found
+                        result = {
+                            entity: entity,
+                            body: null
+                        };
+                    }else if (res.statusCode === 403) {
+                        // no result found
+                        result = {
+                            entity: entity,
+                            body: null
+                        };
+                    }else if (res.statusCode === 500) {
+                        // no result found
+                        result = {
+                            entity: entity,
+                            body: null
+                        };
+                    }else if (res.statusCode === 422) {
                         // no result found
                         result = {
                             entity: entity,
