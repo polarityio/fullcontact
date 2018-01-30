@@ -12,49 +12,36 @@
     {{/if}}
 </div>
 
-<div class="Organizations">
-    {{#each block.data.details.organizations as |item|}}
-
 
     <div class = "organization">
-        {{#if item.name}}
+        {{#if block.data.details.organization}}
         <span class="type"> Organization: </span>
-        <b>{{item.name}}</b>
+        <b>{{block.data.details.organization}}</b>
         {{/if}}
     </div>
 
     <div class = "title">
-        {{#if item.title}}
+        {{#if block.data.details.title}}
         <span class="counts"> Job Title: </span>
-        <b>{{item.title}}</b>
+        <b>{{block.data.details.title}}</b>
         {{/if}}
     </div>
-
-    <div class = "start">
-        {{#if item.startDate}}
-        <span class="counts"> Start Date: </span>
-        <b>{{item.startDate}}</b>
-        {{/if}}
-    </div>
-
-    {{/each}}
-</div>
 
 <div class = "location">
 <i class = "fa fa-info-circle #ADADAD"></i><span class="counts"> Demographics: </span>
 </div>
 
 <div class = "locations">
-{{#if block.data.details.demographics.locationDeduced.normalizedLocation}}
+{{#if block.data.details.location}}
 <span class="counts"> Location: </span>
-<b>{{block.data.details.demographics.locationDeduced.normalizedLocation}}</b>
+<b>{{block.data.details.location}}</b>
 {{/if}}
 </div>
 
 <div class = "gender">
-{{#if block.data.details.demographics.gender}}
+{{#if block.data.details.gender}}
 <span class="counts"> Gender: </span>
-<b>{{block.data.details.demographics.gender}}</b>
+<b>{{block.data.details.gender}}</b>
 {{/if}}
 </div>
 
@@ -62,35 +49,22 @@
 <i class = "fa fa-info-circle #ADADAD"></i><span class="counts"> Social Media Profiles: </span>
 </div>
 
-<div class="socialProfiles">
-    {{#each block.data.details.socialProfiles as |item|}}
-
     <div class = "typeName">
-        {{#if item.typeName}}
-        <span class="type"> <b> {{item.typeName}} </b> </span> <a href="{{item.url}}">  (View in {{item.typeName}}) </a>
+        {{#if block.data.details.linkedin}}
+        <span class="linkedin"> <b> LinkedIn: </b> </span> <a href="{{block.data.details.linkedin}}">  (View in LinkedIn) </a>
         {{/if}}
     </div>
 
     <div class = "followers">
-        {{#if item.followers}}
-        <span class="counts"> Followers: </span>
-        <b>{{item.followers}}</b>
+        {{#if block.data.details.facebook}}
+
+      <span class="facebook">   <b> Facebook: </b> </span> <a href="{{block.data.details.facebook}}">  (View in Facebook) </a>
         {{/if}}
     </div>
 
     <div class = "following">
-        {{#if item.following}}
-        <span class="counts"> Following: </span>
-        <b>{{item.following}}</b>
+      {{#if block.data.details.twitter}}
+
+      <span class="twitter">  <b> Twitter: </b> </span> <a href="{{block.data.details.twitter}}">  (View in Twitter) </a>
         {{/if}}
     </div>
-
-    <div class = "username">
-        {{#if item.username}}
-        <span class="balis"> Username: </span>
-        <b>{{item.username}}</b>
-        {{/if}}
-    </div>
-
-    {{/each}}
-</div>

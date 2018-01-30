@@ -30,17 +30,18 @@ function doLookup(entities, options, cb) {
         if (entity.value) {
             //do the lookup
             let requestOptions = {
-                uri: 'https://api.fullcontact.com/v2/person.json?email=' + entity.value,
-                method: 'GET',
-                headers: {'X-FullContact-APIKey': options.apiKey},
+                uri: 'https://api.fullcontact.com/v3/person.enrich',
+                method: 'POST',
+                headers: {'Authorization': 'Bearer' + " " + options.apiKey},
+                body: {email: entity.value},
                 json: true
             };
 
-            Logger.debug({uri: options}, 'Request URI');
+            Logger.debug({uri: requestOptions}, 'Request URI');
 
             tasks.push(function (done) {
                 requestWithDefaults(requestOptions, function (error, res, body) {
-                    Logger.trace({body: body, statusCode: res.statusCode}, 'Result of Lookup');
+                    Logger.debug({body: body, statusCode: res.statusCode}, 'Result of Lookup');
 
                     if (error) {
                         done(error);
@@ -61,36 +62,35 @@ function doLookup(entities, options, cb) {
                             entity: entity,
                             body: null
                         };
-                    } else if (res.statusCode === 202) {
+                    } else if (res.statusCode === 400) {
                         // no result found
                         result = {
                             entity: entity,
                             body: null
                         };
+                    }else if (res.statusCode === 202) {
+                        // no result found
+                        done('Queing for search, exiting out of process')
+                        return;
+                    }else if (res.statusCode === 401) {
+                        // no result found
+                        done('API key not valid or API limit reached')
+                        return;
                     }else if (res.statusCode === 403) {
                         // no result found
-                        result = {
-                            entity: entity,
-                            body: null
-                        };
+                        done('API Key contains non-hex values or is otherwise invalid')
+                        return;
                     }else if (res.statusCode === 500) {
                         // no result found
-                        result = {
-                            entity: entity,
-                            body: null
-                        };
-                    }else if (res.statusCode === 422) {
+                        done('Server Error');
+                        return;
+                    }else if (res.statusCode === 429) {
                         // no result found
                         result = {
                             entity: entity,
                             body: null
                         };
-                    }else if(res.statusCode === 503){
-                        // reached request limit
-                        done('Request Limit Reached');
-                        return;
                     }
-
                     done(null, result);
                 });
             });
@@ -104,6 +104,7 @@ function doLookup(entities, options, cb) {
         }
 
         results.forEach(result => {
+            Logger.debug({data: result.body}, "Data Results");
             if (result.body === null) {
                 lookupResults.push({
                     entity: result.entity,
@@ -121,6 +122,7 @@ function doLookup(entities, options, cb) {
                         summary: [],
                         details: result.body
                     }
+
                 });
             }
         });
