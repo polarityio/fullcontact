@@ -70,11 +70,11 @@ function doLookup(entities, options, cb) {
                         };
                     }else if (res.statusCode === 202) {
                         // no result found
-                        done('Queing for search, exiting out of process')
+                        done('')
                         return;
                     }else if (res.statusCode === 401) {
                         // no result found
-                        done('API key not valid or API limit reached')
+                        done('Unauthorized, please check if API Key is valid')
                         return;
                     }else if (res.statusCode === 403) {
                         // no result found
@@ -86,10 +86,8 @@ function doLookup(entities, options, cb) {
                         return;
                     }else if (res.statusCode === 429) {
                         // no result found
-                        result = {
-                            entity: entity,
-                            body: null
-                        };
+                        done('Request Limit Reached');
+                        return;
                     }
                     done(null, result);
                 });
