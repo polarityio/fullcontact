@@ -5,8 +5,8 @@ polarity.export = PolarityComponent.extend({
     summaryTags: Ember.computed('details.tags', function(){
         let summaryTags = [];
 
-        if(this.get('details.contactInfo.fullName')){
-            summaryTags.push(this.get('details.contactInfo.fullName'));
+        if(this.get('details.fullName')){
+            summaryTags.push(this.get('details.fullName'));
         }
 
 
